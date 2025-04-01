@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background with Gradient */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        /* Centered Signup Container */
+        .signup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Glassmorphic Form */
+        .signup-form {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+        }
+
+        /* Form Heading */
+        .signup-form h2 {
+            font-size: 26px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        .signup-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.3);
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .signup-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Signup Button */
+        .signup-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff7eb3;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .signup-form button:hover {
+            background-color: #ff5181;
+        }
+
+        /* Link to Login */
+        .signup-form p {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .signup-form a {
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .signup-form a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <form class="signup-form" method="POST">
+            <h2>Signup</h2>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Signup</button>
+            <p><a href="{{ url_for('login') }}">Already have an account?</a></p>
+        </form>
+    </div>
+</body>
+</html>

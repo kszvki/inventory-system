@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Item</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Background */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1d3557, #457b9d);
+            padding: 20px;
+        }
+
+        /* Form Styling */
+        form {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        input[type="file"] {
+            background: #fff;
+            padding: 5px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        /* Buttons & Links */
+        button, a {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        button {
+            background-color: #ff7eb3;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #ff5181;
+        }
+
+        a {
+            background-color: #f4a261;
+            color: #fff;
+        }
+
+        a:hover {
+            background-color: #e76f51;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" enctype="multipart/form-data">
+        <h2>Add New Item</h2>
+        <input type="text" name="name" placeholder="Item Name" required>
+        <textarea name="description" placeholder="Item Description"></textarea>
+        <input type="number" name="quantity" placeholder="Quantity" required>
+        <input type="file" name="image">
+        <button type="submit">Add Item</button>
+    </form>
+    
+    <a href="{{ url_for('index') }}">Back to Inventory</a>
+</body>
+</html>

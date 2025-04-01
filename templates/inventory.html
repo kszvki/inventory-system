@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Inventory</title>
+    <style>
+            /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Background */
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #1d3557, #457b9d);
+        padding: 20px;
+    }
+
+    /* Page Heading */
+    h2 {
+        color: #fff;
+        margin-bottom: 20px;
+    }
+
+    /* Buttons & Links */
+    a, button {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    a {
+        background-color: #f4a261;
+        color: #fff;
+    }
+
+    a:hover {
+        background-color: #e76f51;
+    }
+
+    button {
+        background-color: #ff7eb3;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #ff5181;
+    }
+
+    /* Table Styling */
+    table {
+        width: 90%;
+        max-width: 800px;
+        border-collapse: collapse;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        overflow: hidden;
+        text-align: left;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 12px;
+        color: #fff;
+    }
+
+    th {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    tr:nth-child(even) {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    img {
+        width: 80px;
+        border-radius: 8px;
+    }
+
+    /* Input Fields */
+    input {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 60px;
+        text-align: center;
+    }
+
+    /* Align Actions in One Row */
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 10px; /* Ensures proper spacing */
+    }
+
+    /* Make sure buttons and input align perfectly */
+    .actions input,
+    .actions button {
+        height: 36px;
+    }
+
+    </style>
+</head>
+<body>
+    <h2>Your Inventory</h2>
+    <a href="{{ url_for('add_item') }}">Add New Item</a>
+    <a href="{{ url_for('recently_deleted') }}">Recently Deleted Items</a>
+    
+    <table>
+        <tr>
+            <th>Image</th> 
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>
+                {% if item.image %}
+                    <img src="{{ url_for('static', filename='uploads/' + item.image) }}" alt="Item Image">
+                {% else %}
+                    No image available
+                {% endif %}
+            </td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('withdraw_item', item_id=item.id) }}" style="display:inline;">
+                    <input type="number" name="quantity" placeholder="Qty" min="1" required>
+                    <button type="submit">Withdraw</button>
+                </form>
+                <form method="POST" action="{{ url_for('delete_item', item_id=item.id) }}" style="display:inline;">
+                    <button type="submit">Soft Delete</button>
+                </form>
+                <form method="POST" action="{{ url_for('hard_delete_item', item_id=item.id) }}" style="display:inline;">
+                    <button type="submit">Hard Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
